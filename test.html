@@ -1,0 +1,105 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <!-- ====== SKILLS SECTION ====== -->
+<section id="skills" class="skills-section">
+    <div class="skills-container">
+            <!-- Left side image showing a developer at work -->
+    <div class="skills-image">
+      <img src="/resources/skill img section.jpg" alt="Developer at work" />
+    </div>
+    <div class="skills-content">
+            <h2>Acquired Skills</h2>
+
+      <!-- HTML -->
+      <div class="skill">
+        <label>HTML</label>
+        <div class="bar">
+          <div class="fill" data-percent="90">0%</div>
+        </div>
+      </div>
+
+      <!-- CSS -->
+      <div class="skill">
+        <label>CSS</label>
+        <div class="bar">
+          <div class="fill" data-percent="85">0%</div>
+        </div>
+      </div>
+
+      <!-- JavaScript -->
+      <div class="skill">
+        <label>JavaScript</label>
+        <div class="bar">
+          <div class="fill" data-percent="75">0%</div>
+        </div>
+    </div>
+
+             <!-- Grouped icons for HTML, CSS, and JavaScript -->
+      <div class="tech-icons">
+        <img src="/resources/html icon-Photoroom.png" alt="HTML Icon" />
+        <img src="/resources/css icon-Photoroom.png" alt="CSS Icon" />
+        <img src="/resources/js icon-Photoroom.png" alt="JavaScript Icon" />
+      </div>
+    </div>
+  </div>
+</section>
+      
+
+
+
+
+      <script>
+
+document.addEventListener("DOMContentLoaded", () => {
+  const skillsSection = document.getElementById("skills");
+  const fills = document.querySelectorAll(".fill");
+
+  function animateBars() {
+    fills.forEach(fill => {
+      const target = +fill.getAttribute("data-percent");
+      let count = 0;
+
+      // Animate width smoothly
+      fill.style.width = target + "%";
+
+      // Reset text before counting
+      fill.textContent = "0%";
+
+      // Animate number count
+      const interval = setInterval(() => {
+        if (count < target) {
+          count++;
+          fill.textContent = count + "%";
+        } else {
+          clearInterval(interval);
+        }
+      }, 20); // adjust speed if needed
+    });
+  }
+
+  // Intersection Observer: triggers when 30% of the section is visible
+  const observer = new IntersectionObserver((entries, observer) => {
+    entries.forEach(entry => {
+      if (entry.isIntersecting) {
+        animateBars();
+        observer.unobserve(entry.target); // run once
+      }
+    });
+  }, { threshold: 0.3 });
+
+  observer.observe(skillsSection);
+});
+</script>
+
+
+
+
+</body>
+</html>
